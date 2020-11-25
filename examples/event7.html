@@ -23,17 +23,17 @@
 <script>
   function switchElement(e) {
     const b = e.target;
-    b.classList.add("active");
+    b.classList.add('active');
     window.setTimeout(() => {
       b.classList.remove('active');
     }, 1000);
   }
 
   function moveAway(e) {
-    e.target.style.transform = `translate(${Math.random()*95}vw, ${Math.random()*95}vh )`;
+    e.target.style.transform = `translate(${Math.random() * 95}vw, ${Math.random() * 95}vh )`;
   }
 
-  const button = document.querySelector("button");
-  button.addEventListener("mouseover", moveAway);
-  button.addEventListener("click", switchElement);
+  const button = document.querySelector('button');
+  button.addEventListener('mouseover', moveAway);
+  button.addEventListener('click', switchElement);
 </script>

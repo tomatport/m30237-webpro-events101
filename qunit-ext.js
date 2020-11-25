@@ -7,7 +7,7 @@ window.addEventListener('error', (e) => {
 QUnit.config.reorder = false;
 
 // Credit: https://github.com/goatslacker/get-parameter-names
-function getArgNames(fn = "") {
+function getArgNames(fn = '') {
   const COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg;
   const DEFAULT_PARAMS = /=[^,)]+/mg;
   const FAT_ARROWS = /=>.*$/mg;
@@ -24,9 +24,9 @@ function getArgNames(fn = "") {
 
 // built from multiple lesser online examples
 function ordinal(i) {
-   const ord=['th','st','nd','rd'];
-   const x=i%100;
-   return i+(ord[(x-20)%10]||ord[x]||ord[0]);
+  const ord = ['th', 'st', 'nd', 'rd'];
+  const x = i % 100;
+  return i + (ord[(x - 20) % 10] || ord[x] || ord[0]);
 }
 
 
@@ -36,31 +36,30 @@ QUnit.assert.functionExists = function (fnName, argNames = []) {
   let result = true;
 
   const createResultObject = {
-    expected: `function`,
+    expected: 'function',
     actual: typeof subject,
     result: typeof subject === 'function',
-    message: `Create a function called '${fnName}'.`
+    message: `Create a function called '${fnName}'.`,
   };
   this.pushResult(createResultObject);
   result = result && typeof subject === 'function';
 
-  for (let i=0; i<argNames.length; i++) {
+  for (let i = 0; i < argNames.length; i++) {
     this.pushResult({
       expected: argNames[i],
       actual: realArgNames[i],
       result: argNames[i] === realArgNames[i],
-      message: `The ${ordinal(i+1)} argument should be called '${argNames[i]}'.`
+      message: `The ${ordinal(i + 1)} argument should be called '${argNames[i]}'.`,
     });
     result = result && (argNames[i] === realArgNames[i]);
   }
 
-  const argsResult = subject ? subject.length === argNames.length : false;
-  const plural = argNames.length === 1 ? "argument" : "arguments";
+  const plural = argNames.length === 1 ? 'argument' : 'arguments';
   this.pushResult({
     expected: argNames.length,
     actual: subject ? subject.length : 0,
     result: subject ? subject.length === argNames.length : false,
-    message: `The '${fnName}' function must take ${argNames.length} ${plural}.`
+    message: `The '${fnName}' function must take ${argNames.length} ${plural}.`,
   });
 
   return result;
@@ -72,11 +71,11 @@ QUnit.assert.explain = function (message, result = true) {
 };
 
 if (window.globalErrors.length > 0) {
-  test("Global Error", (assert) => {
+  QUnit.test('Global Error', (assert) => {
     assert.explain(
       `There has been a global error, most probably a syntax error.
        Look in the Javascript console for details.`,
-       false
-     );
+      false,
+    );
   });
 }

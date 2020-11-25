@@ -25,14 +25,14 @@
 
   function recordClick(e) {
     if (e.target.classList.contains('active')) {
-      const score = document.querySelector("#score");
+      const score = document.querySelector('#score');
       clicks += 1;
       score.textContent = clicks;
     }
   }
 
   function moveElem(e) {
-    e.style.transform = `translate(${Math.random()*95}vw, ${Math.random()*95}vh )`;
+    e.style.transform = `translate(${Math.random() * 95}vw, ${Math.random() * 95}vh )`;
   }
 
   function moveAway(e) {
@@ -40,31 +40,29 @@
   }
 
   function activateRandomButton() {
-    const buttons = document.querySelectorAll("button");
+    const buttons = document.querySelectorAll('button');
     for (const b of buttons) {
       b.classList.remove('active');
     }
-    const randomIndex = Math.floor(Math.random()*buttons.length);
+    const randomIndex = Math.floor(Math.random() * buttons.length);
     buttons[randomIndex].classList.add('active');
   }
 
   function createButtons(n) {
-    for (let i=0; i<n; i++) {
-      const b = document.createElement("button");
-      b.textContent = "ClickMe!";
+    for (let i = 0; i < n; i++) {
+      const b = document.createElement('button');
+      b.textContent = 'ClickMe!';
       moveElem(b);
       document.body.append(b);
     }
   }
 
   createButtons(50);
-  const buttons = document.querySelectorAll("button");
+  const buttons = document.querySelectorAll('button');
   for (const b of buttons) {
-  	b.addEventListener("click", recordClick);
-  	b.addEventListener("mouseover", moveAway);
+    b.addEventListener('click', recordClick);
+    b.addEventListener('mouseover', moveAway);
   }
 
-  window.setInterval(activateRandomButton, 1000)
-
-
+  window.setInterval(activateRandomButton, 1000);
 </script>

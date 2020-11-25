@@ -10,12 +10,12 @@
 
 <script>
   function handleClick(e) {
-    const out = document.querySelector("#out");
-    out.textContent = "You clicked " + e.target.textContent;
+    const out = document.querySelector('#out');
+    out.textContent = 'You clicked ' + e.target.textContent;
   }
 
-  const buttons = document.querySelectorAll("button");
+  const buttons = document.querySelectorAll('button');
   for (const b of buttons) {
-  	b.addEventListener("click", handleClick);
+    b.addEventListener('click', handleClick);
   }
 </script>
