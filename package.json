@@ -10,10 +10,12 @@
     "Matt Dennis <matt.dennis@port.ac.uk>"
   ],
   "license": "UNLICENSED",
-  "jshintConfig": {
-    "globalstrict": true,
-    "predef": [
-      "QUnit", "window", "document",
-      "id", "MouseEvent", "lovelyAttacher"]
+  "devDependencies": {
+    "eslint": "^7.14.0",
+    "eslint-config-portsoc": "^0.6.0",
+    "eslint-plugin-html": "^6.1.1"
+  },
+  "scripts": {
+    "lint": "eslint ."
   }
 }
