@@ -2,7 +2,7 @@
 QUnit.config.reorder = false;
 const { test } = QUnit;
 
-// we need to hijack the consolelog function
+// we need to hijack the console.log function
 // in order to capture what is written to it, so...
 
 // create a copy of the original console.log function
@@ -27,26 +27,29 @@ test(
     if (!assert.functionExists('tttcAttacher')) return;
 
     /* global tttcAttacher */
-
     tttcAttacher();
 
-    window.button0.dispatchEvent(new MouseEvent('click'));
+    const button0 = document.querySelector("#button0");
+
+    // see the top of the file for how we set lastLog to be
+    // the most recent thing that was logged using console.log
+    button0.dispatchEvent(new MouseEvent('click'));
     assert.equal(
       window.lastLog,
       'Click Me',
       "Clicking the button should put the button's text on the console.",
     );
 
-    window.button0.textContent = 'Surprise!';
-    window.button0.dispatchEvent(new MouseEvent('click'));
+    button0.textContent = 'Surprise!';
+    button0.dispatchEvent(new MouseEvent('click'));
     assert.equal(
       window.lastLog,
       'Surprise!',
       "Clicking the button should put the button's text on the console (this time it's `Surprise!`).",
     );
 
-    window.button0.textContent = 'Click Me';
-    window.button0.dispatchEvent(new MouseEvent('click'));
+    button0.textContent = 'Click Me';
+    button0.dispatchEvent(new MouseEvent('click'));
     assert.equal(
       window.lastLog,
       'Click Me',
@@ -64,27 +67,28 @@ test(
     if (!assert.functionExists('lovelyParaAttacher')) return;
 
     /* global lovelyParaAttacher */
-
     lovelyParaAttacher();
 
+    const lovely = document.querySelector("#thisisalovelyparagraph");
+
     assert.equal(
-      window.thisisalovelyparagraph.className,
+      lovely.className,
       '',
       'Before the first click event is fired, the element has no class.',
     );
 
-    window.thisisalovelyparagraph.dispatchEvent(new MouseEvent('click'));
+    lovely.dispatchEvent(new MouseEvent('click'));
 
     assert.equal(
-      window.thisisalovelyparagraph.className,
+      lovely.className,
       'lovely',
       'After the first click event is fired, the element class is `lovely`.',
     );
 
-    window.thisisalovelyparagraph.dispatchEvent(new MouseEvent('click'));
+    lovely.dispatchEvent(new MouseEvent('click'));
 
     assert.equal(
-      window.thisisalovelyparagraph.className,
+      lovely.className,
       '',
       'After the second click event is fired, the element has no class`.',
     );
@@ -99,11 +103,12 @@ test(
     if (!assert.functionExists('lovelyButtonAttacher')) return;
 
     /* global lovelyButtonAttacher */
-
     lovelyButtonAttacher();
 
+    const lovely = document.querySelector("#thisisalovelyparagraph");
+
     assert.equal(
-      window.thisisalovelyparagraph.className,
+      lovely.className,
       '',
       'Before the first click event is fired, the element has no class.',
     );
@@ -111,7 +116,7 @@ test(
     window.button1.dispatchEvent(new MouseEvent('click'));
 
     assert.equal(
-      window.thisisalovelyparagraph.className,
+      lovely.className,
       'lovely',
       'After the first click event is fired, the element class is `lovely`.',
     );
@@ -119,7 +124,7 @@ test(
     window.button1.dispatchEvent(new MouseEvent('click'));
 
     assert.equal(
-      window.thisisalovelyparagraph.className,
+      lovely.className,
       '',
       'After the second click event is fired, the element has no class`.',
     );
@@ -201,21 +206,23 @@ test(
     if (!assert.functionExists('snitchAttacher')) return;
 
     /* global snitchAttacher */
-
     snitchAttacher();
 
-    window.mousewatcher.dispatchEvent(new MouseEvent('mouseover'));
+    const mousewatcher = document.querySelector("#mousewatcher");
+    const snitch = document.querySelector("#snitch");
+
+    mousewatcher.dispatchEvent(new MouseEvent('mouseover'));
 
     assert.equal(
-      window.snitch.textContent,
+      snitch.textContent,
       'IN',
       'After a `mouseover` event, the `snitch` text should be `IN`.',
     );
 
-    window.mousewatcher.dispatchEvent(new MouseEvent('mouseout'));
+    mousewatcher.dispatchEvent(new MouseEvent('mouseout'));
 
     assert.equal(
-      window.snitch.textContent,
+      snitch.textContent,
       'OUT',
       'After a `mouseout` event, the `snitch` text should be `OUT`.',
     );
@@ -232,21 +239,24 @@ test(
     if (!assert.functionExists('reportUpdater', ['event'])) return;
 
     /* global reportAttacher */
-
     reportAttacher();
 
-    window.mousereporter.dispatchEvent(new MouseEvent('mousemove', { screenX: 10, screenY: 20 }));
+    const mousereporter = document.querySelector("#mousereporter");
+    const report = document.querySelector("#report");
+
+
+    mousereporter.dispatchEvent(new MouseEvent('mousemove', { screenX: 10, screenY: 20 }));
 
     assert.equal(
-      window.report.textContent,
+      report.textContent,
       'x: 10 y: 20',
       'After a `mousemove` event, the `report` text should reflect mouse position x10y20.',
     );
 
-    window.mousereporter.dispatchEvent(new MouseEvent('mousemove', { screenX: 11, screenY: 21 }));
+    mousereporter.dispatchEvent(new MouseEvent('mousemove', { screenX: 11, screenY: 21 }));
 
     assert.equal(
-      window.report.textContent,
+      report.textContent,
       'x: 11 y: 21',
       'After a `mousemove` event, the `report` text should reflect mouse position x11y21.',
     );
