@@ -135,47 +135,60 @@ test(
     if (!assert.functionExists('concatAttacher')) return;
 
     /* global concatAttacher */
-
     concatAttacher();
+
+    const in1 = document.querySelector("#in1");
+    const in2 = document.querySelector("#in2");
+    const out1 = document.querySelector("#out1");
 
     // // this first sanity check fails in firefox that helpfully remember last values of text fields and puts them right back on reload so in1/in2 are not empty the second time around
     // assert.equal(
-    //     window.out1.textContent,
-    //     window.in1.value + window.in2.value,
+    //     out1.textContent,
+    //     in1.value + in2.value,
     //     "Before the first change, out1 has no text."
     // );
     //
-    window.in1.value = 'Darth';
-    window.in1.dispatchEvent(new Event('change'));
-    window.in2.value = 'Vader';
-    window.in2.dispatchEvent(new Event('change'));
+
+    in1.value = 'Darth';
+    in1.dispatchEvent(new Event('change'));
+    in2.value = 'Vader';
+    in2.dispatchEvent(new Event('change'));
 
     assert.equal(
-      window.out1.textContent,
+      out1.textContent,
       'DarthVader',
       'After the first change, out1 reads `DarthVader`.',
     );
 
-    window.in2.value = 'Tyrannus';
-    window.in2.dispatchEvent(new Event('change'));
+    in2.value = 'Tyrannus';
+    in2.dispatchEvent(new Event('change'));
 
     assert.equal(
-      window.out1.textContent,
+      out1.textContent,
       'DarthTyrannus',
-      'After the first change, out1 reads `DarthTyrannus`.',
+      'After this change, out1 reads `DarthTyrannus`.',
     );
 
-
-    window.in1.value = 'Luke';
-    window.in1.dispatchEvent(new Event('change'));
-    window.in2.value = 'Skywalker';
-    window.in2.dispatchEvent(new Event('change'));
+    in1.value = 'Luke';
+    in1.dispatchEvent(new Event('change'));
+    in2.value = 'Skywalker';
+    in2.dispatchEvent(new Event('change'));
 
     assert.equal(
-      window.out1.textContent,
+      out1.textContent,
       'LukeSkywalker',
-      'After the first change, out1 reads `LukeSkywalker`.',
+      'After this change, out1 reads `LukeSkywalker`.',
     );
+
+    in1.value = 'Ray';
+    in1.dispatchEvent(new Event('change'));
+
+    assert.equal(
+      out1.textContent,
+      'RaySkywalker',
+      'After this change, out1 reads `RaySkywalker`.',
+    );
+
   },
 );
 
