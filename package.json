@@ -10,12 +10,11 @@
     "Matt Dennis <matt.dennis@port.ac.uk>"
   ],
   "license": "UNLICENSED",
-  "devDependencies": {
-    "eslint": "^7.14.0",
-    "eslint-config-portsoc": "^0.6.0",
-    "eslint-plugin-html": "^6.1.1"
-  },
   "scripts": {
     "lint": "eslint ."
+  },
+  "dependencies": {
+    "eslint": "^8.33.0",
+    "eslint-config-portsoc": "^1.0.1"
   }
 }
